@@ -1,7 +1,44 @@
-# Tauri + Vue 3
+# Chat App
 
-This template should help get you started developing with Tauri + Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A modern, real-time chat application built with Vue.js and Tauri. It connects to the chat server which was introduced in [chat server](https://github.com/tyr-rust-bootcamp/05-chat).
 
-## Recommended IDE Setup
+## Features
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+- Real-time messaging
+- User-friendly interface
+- work across web and desktop
+- Lightweight and fast performance
+
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- Node.js (v18 or later)
+- Rust (latest stable version)
+- Tauri CLI
+
+## Setup
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/chat-app.git
+   cd chat-app
+   ```
+
+2. Install dependencies:
+   ```
+   yarn
+   ```
+
+
+## Running the App
+
+To run the desktop app, you could use:
+```
+cargo tauri dev
+```
+
+To run the web app, you could use:
+```
+yarn dev
+```
