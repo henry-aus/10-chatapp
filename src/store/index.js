@@ -3,6 +3,7 @@ import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 import { getUrlBase } from '../utils';
 import { initSSE } from '../utils';
+import { formatMessageDate } from '../utils'; // Add this import
 
 export default createStore({
   state: {
@@ -35,7 +36,12 @@ export default createStore({
       state.users = users;
     },
     setMessages(state, { channelId, messages }) {
-      state.messages[channelId] = messages;
+      // Format the date for each message before setting them in the state
+      const formattedMessages = messages.map(message => ({
+        ...message,
+        formattedCreatedAt: formatMessageDate(message.createdAt)
+      }));
+      state.messages[channelId] = formattedMessages.reverse();
     },
     addChannel(state, channel) {
       state.channels.push(channel);
@@ -43,9 +49,11 @@ export default createStore({
     },
     addMessage(state, { channelId, message }) {
       if (state.messages[channelId]) {
-        // we should prepend the message to the list
-        state.messages[channelId].unshift(message);
+        // Format the message date before adding it to the state
+        message.formattedCreatedAt = formatMessageDate(message.createdAt);
+        state.messages[channelId].push(message);
       } else {
+        message.formattedCreatedAt = formatMessageDate(message.createdAt);
         state.messages[channelId] = [message];
       }
     },
