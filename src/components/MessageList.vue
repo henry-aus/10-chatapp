@@ -9,7 +9,7 @@
         <div class="max-w-4/5">
           <div class="flex items-center mb-1">
             <span class="font-bold mr-2">{{ getSender(message.senderId).fullname }}</span>
-            <span class="text-xs text-gray-500">{{ formatTime(message.createdAt) }}</span>
+            <span class="text-xs text-gray-500">{{ message.formattedCreatedAt }}</span>
           </div>
           <div class="text-sm leading-relaxed break-words whitespace-pre-wrap">{{ message.content }}</div>
         </div>
@@ -40,10 +40,6 @@ export default {
     }
   },
   methods: {
-    formatTime(time) {
-      const date = new Date(time);
-      return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    },
     fetchMessages(channelId) {
       this.$store.dispatch('fetchMessagesForChannel', channelId);
     },
