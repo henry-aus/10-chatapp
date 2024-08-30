@@ -41,7 +41,7 @@ export default createStore({
         ...message,
         formattedCreatedAt: formatMessageDate(message.createdAt)
       }));
-      state.messages[channelId] = formattedMessages;
+      state.messages[channelId] = formattedMessages.reverse();
     },
     addChannel(state, channel) {
       state.channels.push(channel);

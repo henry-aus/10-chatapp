@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 overflow-y-auto p-5">
+  <div class="flex-1 overflow-y-auto p-5 mb-10" ref="messageContainer">
     <div v-if="messages.length === 0" class="text-center text-gray-400 mt-5">
       No messages in this channel yet.
     </div>
@@ -33,6 +33,14 @@ export default {
     }
   },
   watch: {
+    messages: {
+      handler() {
+        this.$nextTick(() => {
+          this.scrollToBottom();
+        });
+      },
+      deep: true
+    },
     activeChannelId(newChannelId) {
       if (newChannelId) {
         this.fetchMessages(newChannelId);
@@ -45,12 +53,22 @@ export default {
     },
     getSender(userId) {
       return this.$store.getters.getUserById(userId);
+    },
+    scrollToBottom() {
+      const container = this.$refs.messageContainer;
+      if (container) {
+        container.scrollTop = container.scrollHeight;
+      }
     }
   },
   mounted() {
     if (this.activeChannelId) {
       this.fetchMessages(this.activeChannelId);
     }
+    this.scrollToBottom();
+  },
+  updated() {
+    this.scrollToBottom();
   }
 };
 </script>
